@@ -28,8 +28,9 @@ export function LoginPage() {
 
       <form onSubmit={handleSubmit} style={{ display: "grid", gap: "1rem" }}>
         <div>
-          <label>Email</label>
+          <label htmlFor="email">Email</label>
           <input
+            id="email"
             style={{ width: "100%", padding: "0.5rem" }}
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -37,8 +38,9 @@ export function LoginPage() {
         </div>
 
         <div>
-          <label>Password</label>
+          <label htmlFor="password">Password</label>
           <input
+            id="password"
             type="password"
             style={{ width: "100%", padding: "0.5rem" }}
             value={password}
