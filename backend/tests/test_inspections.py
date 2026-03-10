@@ -5,7 +5,7 @@ from tests.conftest import TestingSessionLocal
 
 def test_inspector_can_create_inspection(client):
     login_response = client.post(
-        "/auth/login",
+        "/api/auth/login",
         data={
             "username": "inspector@example.com",
             "password": "Inspector123!",
@@ -14,7 +14,7 @@ def test_inspector_can_create_inspection(client):
     token = login_response.json()["access_token"]
 
     response = client.post(
-        "/inspections/",
+        "/api/inspections/",
         json={
             "title": "Large pothole near school",
             "description": "Deep pothole causing traffic issues",
@@ -37,7 +37,7 @@ def test_inspector_can_create_inspection(client):
 
 def test_inspector_list_only_own_inspections(client):
     login_response = client.post(
-        "/auth/login",
+        "/api/auth/login",
         data={
             "username": "inspector@example.com",
             "password": "Inspector123!",
@@ -46,7 +46,7 @@ def test_inspector_list_only_own_inspections(client):
     token = login_response.json()["access_token"]
 
     create_response = client.post(
-        "/inspections/",
+        "/api/inspections/",
         json={
             "title": "Inspection A",
             "description": "Test",
@@ -64,7 +64,7 @@ def test_inspector_list_only_own_inspections(client):
     assert create_response.status_code == 201
 
     list_response = client.get(
-        "/inspections/",
+        "/api/inspections/",
         headers={"Authorization": f"Bearer {token}"},
     )
 
@@ -76,7 +76,7 @@ def test_inspector_list_only_own_inspections(client):
 
 def test_nearby_search_returns_created_inspection(client):
     login_response = client.post(
-        "/auth/login",
+        "/api/auth/login",
         data={
             "username": "inspector@example.com",
             "password": "Inspector123!",
@@ -85,7 +85,7 @@ def test_nearby_search_returns_created_inspection(client):
     token = login_response.json()["access_token"]
 
     create_response = client.post(
-        "/inspections/",
+        "/api/inspections/",
         json={
             "title": "Nearby Test",
             "description": "Nearby inspection",
@@ -103,7 +103,7 @@ def test_nearby_search_returns_created_inspection(client):
     assert create_response.status_code == 201
 
     nearby_response = client.get(
-        "/inspections/nearby?lat=36.7378&lng=-119.7871&radius_meters=1000",
+        "/api/inspections/nearby?lat=36.7378&lng=-119.7871&radius_meters=1000",
         headers={"Authorization": f"Bearer {token}"},
     )
 

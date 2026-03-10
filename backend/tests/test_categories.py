@@ -1,6 +1,6 @@
 def test_admin_can_create_category(client):
     login_response = client.post(
-        "/auth/login",
+        "/api/auth/login",
         data={
             "username": "admin@example.com",
             "password": "Admin123!",
@@ -9,7 +9,7 @@ def test_admin_can_create_category(client):
     token = login_response.json()["access_token"]
 
     response = client.post(
-        "/categories/",
+        "/api/categories/",
         json={
             "name": "Graffiti",
             "description": "Wall defacement",
@@ -24,7 +24,7 @@ def test_admin_can_create_category(client):
 
 def test_inspector_cannot_create_category(client):
     login_response = client.post(
-        "/auth/login",
+        "/api/auth/login",
         data={
             "username": "inspector@example.com",
             "password": "Inspector123!",
@@ -33,7 +33,7 @@ def test_inspector_cannot_create_category(client):
     token = login_response.json()["access_token"]
 
     response = client.post(
-        "/categories/",
+        "/api/categories/",
         json={
             "name": "Electrical",
             "description": "Electrical issue",

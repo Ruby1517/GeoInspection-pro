@@ -1,6 +1,6 @@
 def test_login_success(client):
     response = client.post(
-        "/auth/login",
+        "/api/auth/login",
         data={
             "username": "inspector@example.com",
             "password": "Inspector123!",
@@ -15,7 +15,7 @@ def test_login_success(client):
 
 def test_login_invalid_password(client):
     response = client.post(
-        "/auth/login",
+        "/api/auth/login",
         data={
             "username": "inspector@example.com",
             "password": "WrongPassword",
@@ -27,7 +27,7 @@ def test_login_invalid_password(client):
 
 def test_read_me(client):
     login_response = client.post(
-        "/auth/login",
+        "/api/auth/login",
         data={
             "username": "inspector@example.com",
             "password": "Inspector123!",
@@ -37,7 +37,7 @@ def test_read_me(client):
     token = login_response.json()["access_token"]
 
     response = client.get(
-        "/auth/me",
+        "/api/auth/me",
         headers={"Authorization": f"Bearer {token}"},
     )
 

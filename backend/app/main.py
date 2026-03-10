@@ -34,7 +34,7 @@ def db_health():
     return {"database": "connected", "result": value}
 
 
-app.include_router(auth_router)
-app.include_router(categories_router)
-app.include_router(inspections_router)
-app.include_router(service_areas_router)
+app.include_router(auth_router, prefix="/api")
+app.include_router(categories_router, prefix="/api")
+app.include_router(inspections_router, prefix="/api")
+app.include_router(service_areas_router, prefix="/api")
