@@ -20,6 +20,7 @@ export function Navbar() {
       <Link to="/inspections/new">Create Inspection</Link>
       <Link to="/inspections/nearby">Nearby Search</Link>
       <Link to="/service-areas">Service Areas</Link>
+      <Link to="/parcels">Parcels</Link>
 
       <div style={{ marginLeft: "auto", display: "flex", gap: "1rem", alignItems: "center" }}>
         {user && (

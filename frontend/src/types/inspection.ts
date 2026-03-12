@@ -4,6 +4,7 @@ export type Inspection = {
   title: string;
   description?: string | null;
   category_id: number;
+  parcel_id?: number | null;
   priority: "low" | "medium" | "high" | "critical";
   status: "open" | "in_review" | "assigned" | "in_progress" | "resolved" | "closed";
   address?: string | null;

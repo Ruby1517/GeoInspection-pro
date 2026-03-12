@@ -55,11 +55,32 @@ def create_inspection(
         srid=4326,
     )
 
+    parcel_row = db.execute(
+        text(
+            """
+            SELECT id
+            FROM parcels
+            WHERE ST_Within(
+                ST_SetSRID(ST_MakePoint(:lng, :lat), 4326),
+                boundary
+            )
+            LIMIT 1
+            """
+        ),
+        {
+            "lng": float(payload.longitude),
+            "lat": float(payload.latitude),
+        },
+    ).first()
+
+    parcel_id = parcel_row[0] if parcel_row else None
+
     inspection = Inspection(
         inspection_number="TEMP",
         title=payload.title,
         description=payload.description,
         category_id=payload.category_id,
+        parcel_id=parcel_id,
         priority=payload.priority,
         status=payload.status,
         address=payload.address,
@@ -249,6 +270,26 @@ def update_inspection(
             f"POINT({float(new_longitude)} {float(new_latitude)})",
             srid=4326
         )
+
+        parcel_row = db.execute(
+            text(
+                """
+                SELECT id
+                FROM parcels
+                WHERE ST_Within(
+                    ST_SetSRID(ST_MakePoint(:lng, :lat), 4326),
+                    boundary
+                )
+                LIMIT 1
+                """
+            ),
+            {
+                "lng": float(new_longitude),
+                "lat": float(new_latitude),
+            },
+        ).first()
+
+        inspection.parcel_id = parcel_row[0] if parcel_row else None
 
     db.commit()
     db.refresh(inspection)

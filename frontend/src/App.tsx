@@ -9,6 +9,7 @@ import { LoginPage } from "./pages/LoginPage";
 import { NearbySearchPage } from "./pages/NearbySearchPage";
 import { ServiceAreasPage } from "./pages/ServiceAreasPage";
 import { InspectionDetailPage } from "./pages/InspectionDetailPage";
+import { ParcelsPage } from "./pages/ParcelsPage";
 
 function App() {
   return (
@@ -79,7 +80,15 @@ function App() {
               </ProtectedRoute>
             }
           />
-          
+
+          <Route
+            path="/parcels"
+            element={
+              <ProtectedRoute>
+                <ParcelsPage />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

@@ -36,6 +36,7 @@ class InspectionRead(BaseModel):
     title: str
     description: str | None = None
     category_id: int
+    parcel_id: int | None = None
     priority: InspectionPriority
     status: InspectionStatus
     address: str | None = None
@@ -54,6 +55,7 @@ class NearbyInspectionRead(BaseModel):
     title: str
     description: str | None = None
     category_id: int
+    parcel_id: int | None = None
     priority: InspectionPriority
     status: InspectionStatus
     address: str | None = None
@@ -65,4 +67,4 @@ class NearbyInspectionRead(BaseModel):
     updated_at: datetime
     distance_meters: float
 
-    model_config = ConfigDict(from_attributes=True)    
+    model_config = ConfigDict(from_attributes=True)

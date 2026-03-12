@@ -11,6 +11,7 @@ from app.models.category import Category
 from app.models.inspection import Inspection
 from app.models.service_area import ServiceArea
 from app.models.user import User
+from app.models.parcel import Parcel
 
 config = context.config
 
@@ -22,6 +23,14 @@ config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
 target_metadata = Base.metadata
 
 
+def include_object(object_, name, type_, reflected, compare_to):
+    # Ignore reflected DB objects that are not represented in SQLAlchemy models
+    # (e.g. PostGIS extension-managed tables).
+    if reflected and compare_to is None:
+        return False
+    return True
+
+
 def run_migrations_offline() -> None:
     url = config.get_main_option("sqlalchemy.url")
     context.configure(
@@ -29,6 +38,7 @@ def run_migrations_offline() -> None:
         target_metadata=target_metadata,
         literal_binds=True,
         compare_type=True,
+        include_object=include_object,
     )
 
     with context.begin_transaction():
@@ -47,6 +57,7 @@ def run_migrations_online() -> None:
             connection=connection,
             target_metadata=target_metadata,
             compare_type=True,
+            include_object=include_object,
         )
 
         with context.begin_transaction():

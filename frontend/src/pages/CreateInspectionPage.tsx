@@ -84,75 +84,102 @@ export function CreateInspectionPage() {
         />
 
         <form onSubmit={handleSubmit} style={{ display: "grid", gap: "1rem", marginTop: "1rem" }}>
-          <input
-            placeholder="Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
+          <label>
+            Title
+            <input
+              placeholder="Enter inspection title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </label>
 
-          <textarea
-            placeholder="Description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
+          <label>
+            Description
+            <textarea
+              placeholder="Describe the inspection"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </label>
 
-          <select
-            value={categoryId}
-            onChange={(e) => setCategoryId(Number(e.target.value))}
-          >
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
+          <label>
+            Category
+            <select
+              value={categoryId}
+              onChange={(e) => setCategoryId(Number(e.target.value))}
+            >
+              {categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+          </label>
 
-          <select value={priority} onChange={(e) => setPriority(e.target.value as any)}>
-            <option value="low">low</option>
-            <option value="medium">medium</option>
-            <option value="high">high</option>
-            <option value="critical">critical</option>
-          </select>
+          <label>
+            Priority
+            <select value={priority} onChange={(e) => setPriority(e.target.value as any)}>
+              <option value="low">low</option>
+              <option value="medium">medium</option>
+              <option value="high">high</option>
+              <option value="critical">critical</option>
+            </select>
+          </label>
 
-          <select value={status} onChange={(e) => setStatus(e.target.value as any)}>
-            <option value="open">open</option>
-            <option value="in_review">in_review</option>
-            <option value="assigned">assigned</option>
-            <option value="in_progress">in_progress</option>
-            <option value="resolved">resolved</option>
-            <option value="closed">closed</option>
-          </select>
+          <label>
+            Status
+            <select value={status} onChange={(e) => setStatus(e.target.value as any)}>
+              <option value="open">open</option>
+              <option value="in_review">in_review</option>
+              <option value="assigned">assigned</option>
+              <option value="in_progress">in_progress</option>
+              <option value="resolved">resolved</option>
+              <option value="closed">closed</option>
+            </select>
+          </label>
 
-          <input
-            placeholder="Address"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-          />
+          <label>
+            Address
+            <input
+              placeholder="Enter inspection address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
+          </label>
 
-          <input
-            type="number"
-            step="0.000001"
-            placeholder="Latitude"
-            value={latitude}
-            onChange={(e) => setLatitude(Number(e.target.value))}
-          />
+          <label>
+            Latitude
+            <input
+              type="number"
+              step="0.000001"
+              placeholder="e.g. 36.737800"
+              value={latitude}
+              onChange={(e) => setLatitude(Number(e.target.value))}
+            />
+          </label>
 
-          <input
-            type="number"
-            step="0.000001"
-            placeholder="Longitude"
-            value={longitude}
-            onChange={(e) => setLongitude(Number(e.target.value))}
-          />
+          <label>
+            Longitude
+            <input
+              type="number"
+              step="0.000001"
+              placeholder="e.g. -119.787100"
+              value={longitude}
+              onChange={(e) => setLongitude(Number(e.target.value))}
+            />
+          </label>
 
-          <input
-            type="number"
-            placeholder="Assigned To User ID (optional)"
-            value={assignedTo}
-            onChange={(e) =>
-              setAssignedTo(e.target.value === "" ? "" : Number(e.target.value))
-            }
-          />
+          <label>
+            Assigned To User ID (optional)
+            <input
+              type="number"
+              placeholder="Enter user id"
+              value={assignedTo}
+              onChange={(e) =>
+                setAssignedTo(e.target.value === "" ? "" : Number(e.target.value))
+              }
+            />
+          </label>
 
           <button type="submit">Create Inspection</button>
         </form>

@@ -8,6 +8,7 @@ from app.api.routes.inspections import router as inspections_router
 from app.api.routes.service_areas import router as service_areas_router
 from app.db.init_db import init_db
 from app.db.session import engine
+from app.api.routes.parcels import router as parcels_router
 
 app = FastAPI(title="GeoInspection Pro API")
 
@@ -38,3 +39,4 @@ app.include_router(auth_router, prefix="/api")
 app.include_router(categories_router, prefix="/api")
 app.include_router(inspections_router, prefix="/api")
 app.include_router(service_areas_router, prefix="/api")
+app.include_router(parcels_router, prefix="/api")

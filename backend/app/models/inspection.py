@@ -24,6 +24,7 @@ class Inspection(Base):
     description: Mapped[str | None] = mapped_column(Text, nullable=True)
 
     category_id: Mapped[int] = mapped_column(ForeignKey("categories.id"), nullable=False)
+    parcel_id: Mapped[int | None] = mapped_column(ForeignKey("parcels.id"), nullable=True)
 
     priority: Mapped[InspectionPriority] = mapped_column(
         Enum(
@@ -67,5 +68,6 @@ class Inspection(Base):
     )
 
     category = relationship("Category", back_populates="inspections")
+    parcel = relationship("Parcel", back_populates="inspections")
     creator = relationship("User", foreign_keys=[created_by], back_populates="created_inspections")
     assignee = relationship("User", foreign_keys=[assigned_to], back_populates="assigned_inspections")
